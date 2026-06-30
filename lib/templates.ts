@@ -24,7 +24,7 @@ export const DEFAULT_TEMPLATES: Omit<Template, "id" | "createdAt" | "updatedAt">
     name: "Di Roma — Carte Italienne",
     description: "Élégant et authentique, style restaurant italien haut de gamme avec décoration typographique",
     category: "pizzeria",
-    thumbnail: null,
+    thumbnail: undefined,
     isPublic: true,
     blocks: [
       makeBlock("RESTAURANT_NAME", {
