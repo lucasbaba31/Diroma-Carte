@@ -9,7 +9,7 @@ export const authConfig: NextAuthConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const publicPaths = ["/auth/login", "/auth/register"];
+      const publicPaths = ["/auth/login", "/auth/register", "/menu/"];
       if (publicPaths.some((p) => nextUrl.pathname.startsWith(p))) {
         return true;
       }

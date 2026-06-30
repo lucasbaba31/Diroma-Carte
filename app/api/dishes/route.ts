@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
       data: {
         ...data,
         price: data.price,
-        allergens: data.allergens ?? [],
+        allergens: JSON.stringify(data.allergens ?? []),
         order: data.order ?? count,
         available: data.available ?? true,
       },

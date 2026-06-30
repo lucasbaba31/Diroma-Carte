@@ -132,11 +132,18 @@ export function DishCard({
             {dish.description && (
               <p className="text-xs text-stone-600 mb-1">{dish.description}</p>
             )}
-            {dish.allergens && dish.allergens.length > 0 && (
-              <p className="text-xs text-stone-400 italic">
-                Allergènes : {dish.allergens.map((a) => ALLERGEN_LABELS[a] ?? a).join(", ")}
-              </p>
-            )}
+            {(() => {
+              const allergens: string[] = Array.isArray(dish.allergens)
+                ? dish.allergens
+                : typeof dish.allergens === "string" && dish.allergens
+                ? (() => { try { return JSON.parse(dish.allergens as unknown as string); } catch { return []; } })()
+                : [];
+              return allergens.length > 0 ? (
+                <p className="text-xs text-stone-400 italic">
+                  Allergènes : {allergens.map((a) => ALLERGEN_LABELS[a] ?? a).join(", ")}
+                </p>
+              ) : null;
+            })()}
           </div>
         )}
       </div>

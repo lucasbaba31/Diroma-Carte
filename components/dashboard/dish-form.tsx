@@ -33,7 +33,11 @@ interface DishFormProps {
 const ALLERGENS = Object.keys(ALLERGEN_LABELS);
 
 export function DishForm({ dish, categoryId, onSubmit, onCancel }: DishFormProps) {
-  const [allergens, setAllergens] = useState<string[]>(dish?.allergens ?? []);
+  const [allergens, setAllergens] = useState<string[]>(() => {
+    if (!dish?.allergens) return [];
+    if (Array.isArray(dish.allergens)) return dish.allergens;
+    try { return JSON.parse(dish.allergens as unknown as string); } catch { return []; }
+  });
   const [loading, setLoading] = useState(false);
 
   const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<FormValues>({

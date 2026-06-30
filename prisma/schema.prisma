@@ -4,7 +4,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = env("DATABASE_PROVIDER")
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -28,12 +29,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String? 
+  access_token      String? 
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String? 
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -92,8 +93,8 @@ model Dish {
   id          String   @id @default(cuid())
   name        String
   description String?
-  price       Decimal  @db.Decimal(10, 2)
-  allergens   String[] @default([])
+  price       Decimal  
+  allergens   String   @default("[]")
   badge       String?
   image       String?
   categoryId  String
@@ -109,7 +110,7 @@ model Menu {
   id           String     @id @default(cuid())
   name         String
   description  String?
-  format       MenuFormat @default(A4_PORTRAIT)
+  format       String     @default("A4_PORTRAIT")
   restaurantId String
   templateId   String?
   themeId      String?
@@ -164,11 +165,4 @@ model Theme {
   menus      Menu[]
 }
 
-enum MenuFormat {
-  A4_PORTRAIT
-  A4_LANDSCAPE
-  A5
-  FOLDED
-  DOUBLE_PAGE
-  DRINKS_CARD
-}
+

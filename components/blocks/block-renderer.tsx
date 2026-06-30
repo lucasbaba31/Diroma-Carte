@@ -222,22 +222,30 @@ function CategorySection({
   return (
     <div
       style={{
-        fontFamily: s.fontFamily ?? theme?.fonts?.heading ?? "inherit",
-        fontSize: s.fontSize ? `${s.fontSize}px` : "20px",
-        fontWeight: s.fontWeight ?? "600",
-        color: s.color ?? theme?.colors?.primary ?? "#1a1a1a",
-        textAlign: s.textAlign ?? "left",
-        textTransform: s.textTransform ?? "none",
-        letterSpacing: s.letterSpacing ? `${s.letterSpacing}px` : undefined,
-        paddingTop: s.padding?.top ? `${s.padding.top}px` : "16px",
-        paddingBottom: s.padding?.bottom ? `${s.padding.bottom}px` : "8px",
         paddingLeft: s.padding?.left ? `${s.padding.left}px` : undefined,
         paddingRight: s.padding?.right ? `${s.padding.right}px` : undefined,
         backgroundColor: s.backgroundColor ?? undefined,
         marginTop: s.margin?.top ? `${s.margin.top}px` : undefined,
+        paddingTop: s.padding?.top ? `${s.padding.top}px` : "16px",
+        paddingBottom: s.padding?.bottom ? `${s.padding.bottom}px` : "8px",
       }}
     >
-      {category.name}
+      <div
+        style={{
+          fontFamily: s.fontFamily ?? theme?.fonts?.heading ?? "inherit",
+          fontSize: s.fontSize ? `${s.fontSize}px` : "20px",
+          fontWeight: s.fontWeight ?? "600",
+          color: s.color ?? theme?.colors?.primary ?? "#1a1a1a",
+          textAlign: s.textAlign ?? "left",
+          textTransform: s.textTransform ?? "none",
+          letterSpacing: s.letterSpacing ? `${s.letterSpacing}px` : undefined,
+        }}
+      >
+        {category.name}
+      </div>
+      {block.content && (
+        <div dangerouslySetInnerHTML={{ __html: block.content }} />
+      )}
     </div>
   );
 }
@@ -331,14 +339,18 @@ function DishRow({
           {dish.description}
         </p>
       )}
-      {dish.allergens && dish.allergens.length > 0 && (
-        <p
-          className="opacity-50 mt-0.5 text-xs italic"
-          style={{ fontFamily: bodyFont }}
-        >
-          Allergènes : {dish.allergens.map((a) => ALLERGEN_LABELS[a] ?? a).join(", ")}
-        </p>
-      )}
+      {(() => {
+        const allergens: string[] = Array.isArray(dish.allergens)
+          ? dish.allergens
+          : typeof dish.allergens === "string" && dish.allergens
+          ? JSON.parse(dish.allergens)
+          : [];
+        return allergens.length > 0 ? (
+          <p className="opacity-50 mt-0.5 text-xs italic" style={{ fontFamily: bodyFont }}>
+            Allergènes : {allergens.map((a) => ALLERGEN_LABELS[a] ?? a).join(", ")}
+          </p>
+        ) : null;
+      })()}
     </div>
   );
 }

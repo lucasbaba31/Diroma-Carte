@@ -17,7 +17,83 @@ function makeBlock(
   };
 }
 
+const ITALIAN_FLOURISH = `<div style="display:flex;align-items:center;gap:10px;margin-top:6px"><div style="height:1px;width:32px;background:#c9a96e;flex-shrink:0"></div><svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="7" cy="5" rx="6" ry="4" stroke="#c9a96e" stroke-width="1"/><line x1="1" y1="5" x2="13" y2="5" stroke="#c9a96e" stroke-width="0.8"/></svg><div style="height:1px;flex:1;background:linear-gradient(to right,#c9a96e,transparent)"></div></div>`;
+
 export const DEFAULT_TEMPLATES: Omit<Template, "id" | "createdAt" | "updatedAt">[] = [
+  {
+    name: "Di Roma — Carte Italienne",
+    description: "Élégant et authentique, style restaurant italien haut de gamme avec décoration typographique",
+    category: "pizzeria",
+    thumbnail: null,
+    isPublic: true,
+    blocks: [
+      makeBlock("RESTAURANT_NAME", {
+        order: 0,
+        style: {
+          fontFamily: "Playfair Display",
+          fontSize: 38,
+          fontWeight: "700",
+          textAlign: "center",
+          color: "#1a3a2a",
+          letterSpacing: 3,
+          padding: { top: 40, right: 24, bottom: 4, left: 24 },
+        },
+      }),
+      makeBlock("FREE_TEXT", {
+        order: 1,
+        content: `<p style="text-align:center;font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:8px;color:#7a5c3a;text-transform:uppercase;margin:0;padding:0">Aucamville</p>`,
+        style: { padding: { top: 0, right: 0, bottom: 0, left: 0 } },
+        size: { width: "100%", height: "auto" },
+      }),
+      makeBlock("DECORATIVE", {
+        order: 2,
+        content: `<div style="display:flex;align-items:center;justify-content:center;gap:16px;padding:14px 48px"><div style="height:1px;flex:1;background:linear-gradient(to right,transparent,#c9a96e)"></div><svg width="22" height="22" viewBox="0 0 22 22" fill="#c9a96e" xmlns="http://www.w3.org/2000/svg"><polygon points="11,1 13.9,8.1 21.5,8.1 15.5,13.1 17.8,20.5 11,16 4.2,20.5 6.5,13.1 0.5,8.1 8.1,8.1"/></svg><div style="height:1px;flex:1;background:linear-gradient(to left,transparent,#c9a96e)"></div></div>`,
+        style: {},
+        size: { width: "100%", height: "auto" },
+      }),
+      makeBlock("FREE_TEXT", {
+        order: 3,
+        content: `<p style="text-align:center;font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:#5a4a3a;margin:0;padding:0 0 32px 0">Cuisine italienne &nbsp;·&nbsp; Esprit du sud</p>`,
+        style: { padding: { top: 0, right: 0, bottom: 0, left: 0 } },
+        size: { width: "100%", height: "auto" },
+      }),
+      makeBlock("CATEGORY_TITLE", {
+        order: 4,
+        content: ITALIAN_FLOURISH,
+        style: {
+          fontFamily: "Playfair Display",
+          fontSize: 20,
+          fontWeight: "600",
+          textAlign: "left",
+          color: "#1a3a2a",
+          letterSpacing: 1,
+          padding: { top: 28, right: 24, bottom: 4, left: 24 },
+        },
+        variable: "category.name",
+      }),
+      makeBlock("DISH_ITEM", {
+        order: 5,
+        style: {
+          fontFamily: "Cormorant Garamond",
+          fontSize: 16,
+          color: "#2a2a2a",
+          padding: { top: 5, right: 24, bottom: 5, left: 24 },
+        },
+        variable: "dish",
+      }),
+      makeBlock("LEGAL_INFO", {
+        order: 6,
+        content: "Prix TTC, service compris. Allergènes disponibles sur demande.",
+        style: {
+          fontFamily: "Cormorant Garamond",
+          fontSize: 11,
+          textAlign: "center",
+          color: "#aaa",
+          padding: { top: 40, right: 24, bottom: 16, left: 24 },
+        },
+      }),
+    ],
+  },
   {
     name: "Restaurant Gastronomique",
     description: "Élégant et raffiné, idéal pour les tables gastronomiques",

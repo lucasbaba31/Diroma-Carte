@@ -147,6 +147,20 @@ export default function DashboardPage() {
                       Gérer les plats
                     </Button>
                   </Link>
+                  {r.id === "di-roma" && (
+                    <div className="flex gap-1">
+                      <Link href="/menu/di-roma" target="_blank">
+                        <Button variant="outline" size="sm" className="h-8 text-xs border-stone-300 text-stone-700 hover:bg-stone-50">
+                          🤍 Crème
+                        </Button>
+                      </Link>
+                      <Link href="/menu/di-roma/rouge" target="_blank">
+                        <Button variant="outline" size="sm" className="h-8 text-xs border-red-900 text-red-900 hover:bg-red-50">
+                          🍷 Rouge
+                        </Button>
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
