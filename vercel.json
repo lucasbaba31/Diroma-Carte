@@ -1,5 +1,5 @@
 {
-  "buildCommand": "prisma generate && prisma db push && next build",
+  "buildCommand": "prisma generate && prisma db push && tsx scripts/seed-vercel.ts && next build",
   "installCommand": "npm install",
   "framework": "nextjs"
 }
