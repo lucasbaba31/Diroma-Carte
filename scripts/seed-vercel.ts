@@ -26,7 +26,7 @@ async function main() {
   // ─── Restaurant ───────────────────────────────────────────────────────────────
   await prisma.restaurant.upsert({
     where: { id: "di-roma" },
-    update: { name: "Di Roma à Aucamville", description: "Cuisine italienne et spécialités au feu de bois" },
+    update: { name: "Di Roma à Aucamville", description: "Cuisine italienne et spécialités au feu de bois", userId: user.id },
     create: { id: "di-roma", name: "Di Roma à Aucamville", description: "Cuisine italienne et spécialités au feu de bois", userId: user.id },
   });
   console.log("✓ Restaurant");
