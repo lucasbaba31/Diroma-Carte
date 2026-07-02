@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { GalleryClient } from "./gallery-client";
 
+export const dynamic = "force-dynamic";
+
 export default async function GaleriePage() {
   const restaurant = await prisma.restaurant.findUnique({
     where: { id: "di-roma" },

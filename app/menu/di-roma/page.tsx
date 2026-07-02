@@ -3,6 +3,8 @@ import { ALLERGEN_LABELS } from "@/lib/utils";
 import { PrintButton } from "./print-button";
 import { QRCodeBlock } from "./qr-code";
 
+export const dynamic = "force-dynamic";
+
 const GALERIE_URL = (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3001") + "/menu/di-roma/galerie";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
